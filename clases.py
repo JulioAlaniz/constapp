@@ -171,7 +171,7 @@ class PlanillaClaculo:
     def __init__(self):
         print(guardar)
         archivo = open('../salida.csv', 'a')
-        guardar.write
+#        guardar.write
         archivo.close()
         for k, v in guardar.items():
             print("Cantidad de {0} = {1} kg".format(k,v))
