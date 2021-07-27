@@ -1,11 +1,17 @@
 #  archivo de clases y funciones
+
 #  ********************* Imports ********************
+
 import sys
 from rich.table import Table
 from rich.console import Console
 from rich.markdown import Markdown
 from datos import *
+import csv 
 import os
+
+#  ******************** Variabls globales **********
+guardar={}
 
 
 #  ********************* funciones ******************
@@ -55,21 +61,20 @@ def salir(dato):  # reveer segun funcion Curses
 class Materiales:
     def __init__(self, tipo):
         i = 0
-        self.guardar = []
         m2 = int(input("Ingrese la cantidad en m2\n"))
         print("")
         for i in range(0, len(tipo)):
             elementos = tipo[i]
             material = elementos["material"]
             cantidad = elementos["cantidad"]
-            print(f"{material}", f"{float(cantidad)*float(m2)}")
-            self.guardar.append(float(cantidad)*float(m2))
+            #print(f"{material}", f"{float(cantidad)*float(m2)}")
+            guardar[material]= float(cantidad)*float(m2)
         print('')
 
 
 class Concreto(Materiales):
     tipo = concreto
-
+    
 
 class ConcretoHidro(Materiales):
     tipo = concretoHidro
@@ -161,3 +166,46 @@ class Menu:
 #            else:
 #                input("presione Enter para continuar")
 #                input("")
+
+class PlanillaClaculo:
+    def __init__(self):
+        print(guardar)
+        archivo = open('../salida.csv', 'a')
+        guardar.write
+        archivo.close()
+        for k, v in guardar.items():
+            print("Cantidad de {0} = {1} kg".format(k,v))
+        print('')
+
+        #archivo=open('../salida.txt', 'a')
+        #for k, v in guardar.items():
+           #archivo.writelines("{0} , {1}\n".format(k,v))
+        #archivo.write('\n')
+        #archivo.close()
+        #print('')
+
+        guardar.clear()
+
+
+
+'''
+https://code.tutsplus.com/es/tutorials/how-to-read-and-write-csv-files-in-python--cms-29907
+
+DicReader
+import csv
+with open('name.csv') as csvfile:
+reader = csv.DictReader(csvfile)
+for row in reader:
+         print(row['first_name'], row['last_name'])
+
+Dicwriter
+import csv
+with open('name.csv') as csvfile:
+reader = csv.DictWriter(csvfile)
+for row in reader:
+         print(row['first_name'], row['last_name'])
+Esta clase es similar a la clase DictWriter y hace lo contrario, que es escribir datos a un archivo CSV. La clase es definida como   csv.DictWriter(csvfile, fieldnames, restval='', extrasaction='raise', dialect='excel', *args, **kwds)
+
+El parámetro fieldnames define la secuencia de llaves que identifican el orden en el cuál los valores en el diccionario son escritos al archivo CSV. A diferencia de DictReader, esta llave no es opcional y debe ser definida para evitar errores cuando se escribe a un CSV.
+
+'''

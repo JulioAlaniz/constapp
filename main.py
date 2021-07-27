@@ -7,7 +7,7 @@ while i == 0:
     opcion = Menu()
     opcionMortero = opcion.__menu__()
     salir(opcionMortero)
-
+    calculo = PlanillaClaculo()
     input("presione una tecla para continuar")
 else:
     input("presione una tecla para continuar")
