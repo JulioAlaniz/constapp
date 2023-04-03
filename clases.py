@@ -170,19 +170,12 @@ class Menu:
 class PlanillaClaculo:
     def __init__(self):
         print(guardar)
-        archivo = open('../salida.csv', 'a')
-#        guardar.write
-        archivo.close()
+        archivo=open('../salida.txt', 'a')
         for k, v in guardar.items():
-            print("Cantidad de {0} = {1} kg".format(k,v))
+           archivo.writelines("{0} , {1}\n".format(k,v))
+        archivo.write('\n')
+        archivo.close()
         print('')
-
-        #archivo=open('../salida.txt', 'a')
-        #for k, v in guardar.items():
-           #archivo.writelines("{0} , {1}\n".format(k,v))
-        #archivo.write('\n')
-        #archivo.close()
-        #print('')
 
         guardar.clear()
 
@@ -207,5 +200,13 @@ for row in reader:
 Esta clase es similar a la clase DictWriter y hace lo contrario, que es escribir datos a un archivo CSV. La clase es definida como   csv.DictWriter(csvfile, fieldnames, restval='', extrasaction='raise', dialect='excel', *args, **kwds)
 
 El parámetro fieldnames define la secuencia de llaves que identifican el orden en el cuál los valores en el diccionario son escritos al archivo CSV. A diferencia de DictReader, esta llave no es opcional y debe ser definida para evitar errores cuando se escribe a un CSV.
+
+
+import csv
+with open('some.csv', newline='', encoding='utf-8') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+
 
 '''
